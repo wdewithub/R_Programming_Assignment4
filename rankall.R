@@ -55,6 +55,6 @@ rankall <- function (outcome, num=2) {
           result <- rbind(result,state_rank)
         }
       }
-    print(result)
+    result
   }
 }
