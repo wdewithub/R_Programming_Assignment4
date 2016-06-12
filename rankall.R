@@ -55,6 +55,7 @@ rankall <- function (outcome, num=2) {
           result <- rbind(result,state_rank)
         }
       }
-    result
+      names(result) <- c("hospital","state" )    
+      result
   }
 }

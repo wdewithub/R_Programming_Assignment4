@@ -26,7 +26,7 @@ best <- function(state, outcome) {
       no_null <- state_outcome[state_outcome[,2]!="Not Available",]
       no_null_ordered <- no_null[order(as.numeric(as.character(no_null[,2])),no_null[,1]),]
       best <-  no_null_ordered[1,1]
-      print(best)
+      as.character(best) #dan krijg je factor levels niet meer te zien
     }
   }
 }
