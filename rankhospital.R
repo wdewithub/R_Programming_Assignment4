@@ -21,7 +21,25 @@ rankhospital <- function(state, outcome, num) {
   ##Return hospital name that has the requested ranking for the specified outcome variable
   else {
     state_outcome <- input[input$State==state,outcome_col] 
-    #ordenen zie best.r  --> voor beste=head(n=), voor laatste=tail functie gebruiken
-    #zie dat je ook nog 2 checks doet die gevraagd zijn: zie uitroeptekens
+    #filter hospitals with no data on outcome
+    no_null <- state_outcome[state_outcome[,2]!= 'Not Available',]
+    #determine number of hospitals left
+    num_hosp <- nrow(no_null)
+    #give back hospital on requested rank or na if requested rank is higher than number of hospitals
+    no_null_ordered <-no_null[order(as.numeric(as.character(no_null[,2])),no_null[,1]),]    
+    if (num =='best') {
+        print(head(no_null_ordered[,1],n=1))
+    } 
+    else if (num =='worst') {
+        print(tail(no_null_ordered[,1],n=1))       
+    }
+    else {
+      if (num > num_hosp) {
+        stop("NA")
+      }
+      else {
+      print(no_null_ordered[num,1])
+      }
+    }
   }
 }
